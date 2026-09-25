@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You&rsquo;re on the list - Gold Standard Auctions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12100B;--gold:#C9A227;--gold-lt:#E6C463;--parch:#F4EDDD;--cream:#FBF7EE;--green:#1E4D3A;--line:rgba(201,162,39,.28)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--parch);font-family:"Libre Franklin",system-ui,sans-serif;font-size:17px;line-height:1.6;min-height:100vh;display:grid;place-items:center;padding:30px 20px}
+.box{max-width:600px;text-align:center}
+h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2rem,6vw,3rem);color:var(--cream);margin:0 0 14px;line-height:1.1}
+.check{width:74px;height:74px;border-radius:50%;background:linear-gradient(180deg,var(--gold-lt),var(--gold));display:grid;place-items:center;margin:0 auto 22px}
+p{margin:0 0 16px;opacity:.92}
+.next{background:#1C1912;border:1px solid var(--line);border-radius:16px;padding:24px;margin:26px 0;text-align:left}
+.next h2{font-family:"Fraunces",serif;font-size:1.3rem;color:var(--gold-lt);margin:0 0 12px}
+.next li{margin:0 0 10px}
+.btn{display:inline-flex;gap:.5rem;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--gold-lt),var(--gold));color:#241C05;font-weight:700;padding:16px 26px;border-radius:11px;text-decoration:none;margin:6px 6px 0}
+.btn.ghost{background:transparent;color:var(--parch);border:1.5px solid var(--line)}
+a.txt{color:var(--gold-lt);font-weight:700;text-decoration:none}
+.fine{font-size:.82rem;opacity:.6;margin-top:26px}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="check"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#241C05" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+  <h1>You&rsquo;re on the list.</h1>
+  <p>Your free appraisal slot is reserved. Christian&rsquo;s team will text you shortly, usually within minutes during fair week, with next steps and a value.</p>
+  <div class="next">
+    <h2>While you wait</h2>
+    <ul>
+      <li><b>Save our number:</b> <a class="txt" href="tel:+12543274050">254-327-4050</a>. That&rsquo;s who will text you.</li>
+      <li><b>Speed things up:</b> <a class="txt" href="sms:+12543274050">text a photo</a> of your item now and we&rsquo;ll start on a value right away.</li>
+      <li><b>Come by anytime this week:</b> 4721-A Bosque Blvd, Waco, minutes from the Extraco fairgrounds. Walk-ins welcome.</li>
+    </ul>
+  </div>
+  <a class="btn" href="sms:+12543274050">Text a photo now</a>
+  <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=4721-A+Bosque+Blvd+Waco+TX+76710" target="_blank" rel="noopener">Get directions</a>
+  <p class="fine">Free appraisal, no obligation to sell. Offer valid Oct 8-18, 2026.</p>
+</div>
+</body>
+</html>
