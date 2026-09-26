@@ -137,6 +137,15 @@ p{margin:0 0 1rem}
 .proof h2{color:#20180a}
 .proof .q{font-family:"Fraunces",serif; font-size:clamp(1.3rem,3.2vw,1.7rem); font-style:italic; color:#2c2412; max-width:40ch; line-height:1.35}
 .proof .who{margin-top:14px; font-weight:600; color:#6b5a36; font-size:.92rem}
+.tcarousel{max-width:800px; margin:30px 0 6px}
+.tbody{transition:opacity .28s ease; min-height:168px}
+.tstars{color:var(--gold); letter-spacing:3px; font-size:1.05rem; margin-bottom:14px}
+.tquote{font-family:"Fraunces",serif; font-style:italic; font-size:clamp(1.25rem,3vw,1.72rem); color:#2c2412; line-height:1.36; margin:0 0 16px; max-width:48ch}
+.twho{font-weight:700; color:#3a2f1a; font-size:.95rem; margin:0}
+.twho span{margin-left:10px; font-weight:600; color:#8a7a52; font-size:.8rem}
+.tdots{display:flex; gap:9px; margin-top:22px}
+.tdot{width:9px; height:9px; border-radius:50%; background:#D8C89E; border:0; padding:0; cursor:pointer; transition:background .2s, transform .2s}
+.tdot.active{background:var(--gold-deep); transform:scale(1.25)}
 .badges{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
 .badge{display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid #E3D6B4; border-radius:100px; padding:9px 16px; font-weight:600; font-size:.9rem; color:#3a2f1a}
 .badge b{color:var(--gold-deep); font-family:"Fraunces",serif}
@@ -213,7 +222,7 @@ footer .fine{max-width:60ch; margin-top:14px; font-size:.76rem; opacity:.7}
 <section class="section lead-sec" id="claim">
   <div class="wrap leadgrid">
     <div>
-      <span class="slots">Only 40 free slots this week</span>
+      <span class="slots">Free this week only · Ends Oct 18</span>
       <h2>Claim your free appraisal</h2>
       <p class="sub">Tell us what you have and the best number to reach you. Christian&rsquo;s team will text you a value, usually within minutes, and a cash offer if you want one. No cost, no pressure.</p>
       <ul class="benefits">
@@ -225,7 +234,7 @@ footer .fine{max-width:60ch; margin-top:14px; font-size:.76rem; opacity:.7}
 
     <div class="card">
       <h3>Get my free appraisal</h3>
-      <p class="fine">Takes 30 seconds. Slots are limited to 40 for fair week.</p>
+      <p class="fine">Takes 30 seconds. Free through fair week, ends Oct 18.</p>
       <!-- Zoho Web-to-Lead, wired to your "Waco HeartOTexas" CRM form.
            Hidden inputs, honeypot and tokens are required; do not remove. -->
       <form action="https://crm.zoho.com/crm/WebToLeadForm" method="POST"
@@ -317,8 +326,15 @@ footer .fine{max-width:60ch; margin-top:14px; font-size:.76rem; opacity:.7}
 <section class="section proof">
   <div class="wrap">
     <p class="eyebrow" style="color:var(--gold-deep)">Why Central Texas trusts us</p>
-    <p class="q">&ldquo;They found value in coins three other shops missed, and paid me on the spot. I won&rsquo;t sell anywhere else.&rdquo;</p>
-    <p class="who">Add 2-3 of your real Google reviews here before launch.</p>
+    <h2 style="max-width:22ch">Real people. Real coins. Real cash.</h2>
+    <div class="tcarousel">
+      <div class="tbody" id="tbody">
+        <div class="tstars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="tquote" id="tquote"></blockquote>
+        <p class="twho" id="twho"></p>
+      </div>
+      <div class="tdots" id="tdots" role="tablist" aria-label="Customer reviews"></div>
+    </div>
     <div class="badges">
       <span class="badge"><b>4.5&#9733;</b> rating, 600+ reviews</span>
       <span class="badge">Featured on NBC 5</span>
@@ -402,6 +418,39 @@ function gsaValidate(f){
   if(mob.length<10){ alert('Please enter a valid mobile number so we can text your appraisal.'); return false; }
   return true;
 }
+// review carousel (real Google reviews)
+var _rv=[
+ {q:"I had been holding onto my collection for a few years and finally decided to see what it was worth. Chris made the process quick and easy, and I ended up getting more than I expected and sold everything on the spot.", n:"Alexander Sepulveda"},
+ {q:"Friendly conversation. No pressure to sell. I felt completely safe and relaxed during the appraisal.", n:"Eric Bray"},
+ {q:"My mom passed away last year, and in her estate was a ton of coins. I wasn't sure what I was dealing with. Mason took the burden and worry off my shoulders, expertly assessing the value.", n:"Todd Johnson"},
+ {q:"He was very knowledgeable and transparent, and educated us about the business. We left getting a great price for our silver collection.", n:"Stephen Kaiser"},
+ {q:"I had several old coins and old silver and gold jewelry items I wanted appraised. Chris and Ivan thoroughly examined every item and clearly explained the condition and value of each one.", n:"Mark Keeling"},
+ {q:"Very knowledgeable, trustworthy, and helpful. Gold Standard Auctions is the greatest company for all your coin needs.", n:"Sarah Tucker"}
+];
+(function(){
+  var tq=document.getElementById('tquote'), tw=document.getElementById('twho'),
+      body=document.getElementById('tbody'), dots=document.getElementById('tdots'), i=0, timer;
+  if(!tq) return;
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  _rv.forEach(function(_,k){
+    var b=document.createElement('button'); b.className='tdot'+(k===0?' active':'');
+    b.setAttribute('aria-label','Review '+(k+1));
+    b.addEventListener('click',function(){show(k,true);});
+    dots.appendChild(b);
+  });
+  function render(){
+    tq.textContent='\u201C'+_rv[i].q+'\u201D';
+    tw.innerHTML=_rv[i].n+' <span>Verified Google review</span>';
+    Array.prototype.forEach.call(dots.children,function(d,k){d.classList.toggle('active',k===i);});
+  }
+  function show(n,manual){
+    i=(n+_rv.length)%_rv.length; body.style.opacity=0;
+    setTimeout(function(){render(); body.style.opacity=1;},280);
+    if(manual) restart();
+  }
+  function restart(){ if(timer) clearInterval(timer); if(!reduce) timer=setInterval(function(){show(i+1);},5500); }
+  render(); restart();
+})();
 </script>
 <script id="wf_anal" src="https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=c459a14f5b227887b361abcf8a947e073bc656625b37d9a94ba9b8707de6cbe405c8135b8258e3ed439113e3e7d8cdc0gid01d9e6db052b5f8ac69dd7337466ec3caa91cecf9ac041f9cc78a0b13b5cb1e6gid6e7740c8315773fa910298cf32b3f5b12c7cd4d1277f80d2bab60661dde8f1c4gid0385cdeadfc27448bd232fbbb3306227597e297c5a90ab41a69a41e8d581a7a5&amp;tw=18dbacd4285e57e6bf30daa1adef34f6e767588a7c77c3427139570915ec1869&amp;version=v2"></script>
 </body>
