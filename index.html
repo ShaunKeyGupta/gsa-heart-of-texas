@@ -226,36 +226,32 @@ footer .fine{max-width:60ch; margin-top:14px; font-size:.76rem; opacity:.7}
     <div class="card">
       <h3>Get my free appraisal</h3>
       <p class="fine">Takes 30 seconds. Slots are limited to 40 for fair week.</p>
-      <!-- ============================================================
-           ZOHO CRM WEB-TO-LEAD FORM
-           1) In Zoho CRM: Setup > Developer Hub > Webforms > create a
-              Leads form. Copy its two tokens and paste below.
-           2) Confirm the action URL matches your Zoho datacenter
-              (.com US / .eu EU / .in India / .com.au AU).
-           3) Set the returnURL to your live thank-you page.
-      ============================================================ -->
+      <!-- Zoho Web-to-Lead, wired to your "Waco HeartOTexas" CRM form.
+           Hidden inputs, honeypot and tokens are required; do not remove. -->
       <form action="https://crm.zoho.com/crm/WebToLeadForm" method="POST"
             accept-charset="UTF-8" onsubmit="return gsaValidate(this)">
-        <input type="text"   style="display:none" name="xnQsjsdp"   value="PASTE_YOUR_ZOHO_XNQSJSDP_TOKEN">
+        <input type="text"   style="display:none" name="xnQsjsdp"   value="0cf89aa7b9c8ca9fa4178594a7ea22054e1fe46b0ddb4dcfcc61c0fa5df7c5b3">
         <input type="hidden" name="zc_gad" value="">
-        <input type="text"   style="display:none" name="xmIwtLD"    value="PASTE_YOUR_ZOHO_XMIWTLD_TOKEN">
+        <input type="text"   style="display:none" name="xmIwtLD"    value="9e2ede7a9c09696e7c5cfd4e8855112017449348f395fb3458d43c6c836efdda634358ab80435eb6b181016c4a28400d">
         <input type="text"   style="display:none" name="actionType" value="TGVhZHM=">
         <input type="text"   style="display:none" name="returnURL"  value="https://gsaheartotexas.com/thankyou.html">
-        <input type="hidden" name="Lead Source" value="Heart of Texas Fair 2026">
-        <input type="hidden" name="Company"     value="Fair Lead (Individual)">
+        <input type="hidden" name="Lead Source" value="Website">
+        <input type="hidden" name="LEADCF183"   value="Website Form">
+        <input type="hidden" name="LEADCF215"   value="Waco Heart O Texas">
 
         <div class="field">
           <label for="ln">Your name</label>
           <input id="ln" name="Last Name" type="text" autocomplete="name" required placeholder="First and last">
         </div>
         <div class="field">
-          <label for="mb">Mobile number</label>
-          <input id="mb" name="Mobile" type="tel" autocomplete="tel" required placeholder="(254) 000-0000">
+          <label for="ph">Mobile number</label>
+          <input id="ph" name="Phone" type="tel" autocomplete="tel" maxlength="30" required placeholder="(254) 000-0000">
         </div>
         <div class="field">
           <label for="ds">What do you have?</label>
-          <textarea id="ds" name="Description" placeholder="e.g. a jar of old silver coins, a Rolex, Grandpa&rsquo;s Winchester, an estate to clear"></textarea>
+          <textarea id="ds" name="LEADCF312" placeholder="e.g. a jar of old silver coins, a Rolex, Grandpa&rsquo;s Winchester, an estate to clear"></textarea>
         </div>
+        <input type="text" style="display:none" name="aG9uZXlwb3Q" value="">
         <button class="btn btn-lg" type="submit">Get my free appraisal</button>
         <p class="reassure">No cost. No obligation. Your info is never sold.</p>
       </form>
@@ -401,11 +397,12 @@ footer .fine{max-width:60ch; margin-top:14px; font-size:.76rem; opacity:.7}
 })();
 // light validation
 function gsaValidate(f){
-  var name=f['Last Name'].value.trim(), mob=f['Mobile'].value.replace(/[^0-9]/g,'');
+  var name=f['Last Name'].value.trim(), mob=f['Phone'].value.replace(/[^0-9]/g,'');
   if(name.length<2){ alert('Please enter your name.'); return false; }
   if(mob.length<10){ alert('Please enter a valid mobile number so we can text your appraisal.'); return false; }
   return true;
 }
 </script>
+<script id="wf_anal" src="https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=c459a14f5b227887b361abcf8a947e073bc656625b37d9a94ba9b8707de6cbe405c8135b8258e3ed439113e3e7d8cdc0gid01d9e6db052b5f8ac69dd7337466ec3caa91cecf9ac041f9cc78a0b13b5cb1e6gid6e7740c8315773fa910298cf32b3f5b12c7cd4d1277f80d2bab60661dde8f1c4gid0385cdeadfc27448bd232fbbb3306227597e297c5a90ab41a69a41e8d581a7a5&amp;tw=18dbacd4285e57e6bf30daa1adef34f6e767588a7c77c3427139570915ec1869&amp;version=v2"></script>
 </body>
 </html>
